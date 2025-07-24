@@ -39,78 +39,77 @@
 
             <!-- 오른쪽: 주문 옵션 -->
             <section class="order-form">
+                <!-- 기본사항 섹션 -->
                 <div class="form-section">
-                    <div class="form-row">
-                        <label class="form-label basic-label">기본사항</label>
-                        <div class="form-control-group">
-                            <div class="form-row-inner">
-                                <label for="print-title" class="sub-label">인쇄물제목</label>
-                                <input type="text" id="print-title" class="form-input" placeholder="업로드한 파일명은 인쇄물 제목으로 사용됩니다.">
+                    <div class="section-title">기본사항</div>
+                    <div class="section-content">
+                        <div class="form-row-inner">
+                            <label for="print-title" class="sub-label">인쇄물제목</label>
+                            <input type="text" id="print-title" class="form-input" placeholder="업로드한 파일명은 인쇄물 제목으로 사용됩니다.">
+                        </div>
+                        <div class="form-row-inner">
+                            <label for="product-name" class="sub-label">상품명</label>
+                            <select id="product-name" class="form-select"></select>
+                        </div>
+                        <div class="form-row-inner">
+                            <label for="paper-type" class="sub-label">종이</label>
+                            <select id="paper-type" class="form-select"></select>
+                        </div>
+                        <div class="form-row-inner">
+                            <label for="print-method" class="sub-label">인쇄도수</label>
+                            <select id="print-method" class="form-select"></select>
+                        </div>
+                        <div class="form-row-inner size-row">
+                            <label for="size-preset" class="sub-label">사이즈</label>
+                            <select id="size-preset" class="form-select size-preset"></select>
+                            <span class="size-display"></span>
+                            <select id="size-unit" class="form-select size-unit"></select>
+                        </div>
+                        <div class="form-row-inner dimension-row">
+                            <label class="sub-label">재단사이즈</label>
+                            <div class="dimension-inputs">
+                                <span>가로 <input type="number" class="form-input dim-input" id="cut-width"> mm</span>
+                                <span>× 세로 <input type="number" class="form-input dim-input" id="cut-height"> mm</span>
                             </div>
-                            <div class="form-row-inner">
-                                <label for="product-name" class="sub-label">상품명</label>
-                                <select id="product-name" class="form-select"></select>
+                        </div>
+                        <div class="form-row-inner dimension-row">
+                            <label class="sub-label">작업사이즈</label>
+                            <div class="dimension-inputs">
+                                <span>가로 <input type="number" class="form-input dim-input" id="bleed-width"> mm</span>
+                                <span>× 세로 <input type="number" class="form-input dim-input" id="bleed-height"> mm</span>
                             </div>
-                            <div class="form-row-inner">
-                                <label for="paper-type" class="sub-label">종이</label>
-                                <select id="paper-type" class="form-select"></select>
+                        </div>
+                        <div class="form-row-inner">
+                            <label for="quantity" class="sub-label">수량</label>
+                            <div class="quantity-control">
+                                <select id="quantity" class="form-select quantity-select"></select>
+                                <span>x</span>
+                                <input type="number" value="1" class="form-input quantity-case">
+                                <span>건</span>
                             </div>
-                            <div class="form-row-inner">
-                                <label for="print-method" class="sub-label">인쇄도수</label>
-                                <select id="print-method" class="form-select"></select>
-                            </div>
-                            <div class="form-row-inner size-row">
-                                <label for="size-preset" class="sub-label">사이즈</label>
-                                <select id="size-preset" class="form-select size-preset"></select>
-                                <span class="size-display"></span>
-                                <select id="size-unit" class="form-select size-unit"></select>
-                            </div>
-                             <div class="form-row-inner dimension-row">
-                                <label class="sub-label hidden-label">사이즈</label>
-                                <div class="dimension-inputs">
-                                    <span>재단사이즈 : 가로 <input type="number" class="form-input dim-input" id="cut-width"> mm</span>
-                                    <span>× 세로 <input type="number" class="form-input dim-input" id="cut-height"> mm</span>
+                        </div>
+                        <div class="form-row-inner">
+                            <label class="sub-label"></label>
+                            <div class="quantity-slider-container">
+                                <input type="range" id="quantity-slider" min="200" max="1000" value="200" class="slider">
+                                <div class="slider-labels">
+                                    <span>200장</span>
+                                    <span>1,800장</span>
+                                    <span>10,000장</span>
+                                    <span>100,000장</span>
                                 </div>
                             </div>
-                            <div class="form-row-inner dimension-row">
-                                <label class="sub-label hidden-label">사이즈</label>
-                                <div class="dimension-inputs">
-                                    <span>작업사이즈 : 가로 <input type="number" class="form-input dim-input" id="bleed-width"> mm</span>
-                                    <span>× 세로 <input type="number" class="form-input dim-input" id="bleed-height"> mm</span>
-                                </div>
-                            </div>
-                            <div class="form-row-inner">
-                                <label for="quantity" class="sub-label">수량</label>
-                                <div class="quantity-control">
-                                    <select id="quantity" class="form-select quantity-select"></select>
-                                    <span>x</span>
-                                    <input type="number" value="1" class="form-input quantity-case">
-                                    <span>건</span>
-                                </div>
-                            </div>
-                             <div class="form-row-inner">
-                                <label class="sub-label hidden-label">수량</label>
-                                <div class="quantity-slider-container">
-                                    <input type="range" id="quantity-slider" min="200" max="1000" value="400" step="1" class="slider">
-                                    <div class="slider-labels">
-                                        <span>200장</span>
-                                        <span>400장</span>
-                                        <span>600장</span>
-                                        <span>1,000장</span>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="form-row-inner">
-                                <label for="options" class="sub-label">옵션</label>
-                                <input type="text" id="options" class="form-input" placeholder="없음" readonly>
-                            </div>
+                        </div>
+                        <div class="form-row-inner">
+                            <label for="options" class="sub-label">옵션</label>
+                            <input type="text" id="options" class="form-input" placeholder="없음" readonly>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-section post-processing">
-                    <label class="form-label">후가공</label>
-                    <div class="post-processing-controls">
+                <!-- 후가공 섹션 -->
+                <div class="form-section">
+                    <div class="section-title">후가공</div>
+                    <div class="section-content post-processing-controls">
                         <button class="btn btn-gray">후가공 선택</button>
                         <span>귀도리 [네귀도리/6mm]</span>
                     </div>
@@ -123,7 +122,6 @@
             <div class="preview-box">
                 <div class="preview-image-wrapper">
                     <img src="https://i.imgur.com/oD4aPjj.png" alt="Good Printing Logo">
-                    <!-- 오버레이 가이드 라인 -->
                     <div class="guide-line bleed-line"></div>
                     <div class="guide-line cut-line"></div>
                     <span class="dim-label dim-w-bleed">90</span>
@@ -139,35 +137,42 @@
         </section>
 
         <footer class="order-summary-footer">
-            <div class="price-details">
-                <div class="price-row">
-                    <span>정상판매가</span>
-                    <span class="original-price">0원 <small>부가세 10% 포함</small></span>
-                    <button class="btn btn-blue-outline">할인상세 보기</button>
-                </div>
-                <div class="price-row">
-                    <span class="total-label">결제금액</span>
-                    <span class="total-price">0 <small>원</small></span>
-                    <span class="price-breakdown">공급가 : 0원 + 부가세 : 0원</span>
-                </div>
-            </div>
-            <div class="summary-details">
-                <div class="summary-row">
-                    <span>주문내역</span>
-                    <p id="order-summary-text"></p>
-                </div>
-                 <div class="summary-row">
-                    <label for="file-upload" class="form-label">파일</label>
-                    <div class="file-upload-control">
-                        <button class="btn btn-gray">파일 추가하기</button>
-                        <input type="text" id="file-upload" class="form-input" readonly>
+            <!-- 하단 정보 박스 -->
+            <div class="summary-box">
+                <div class="price-details">
+                    <div class="price-row">
+                        <span>정상판매가</span>
+                        <div>
+                            <span class="original-price">0원 <small>부가세 10% 포함</small></span>
+                            <button class="btn btn-blue-outline">할인상세 보기</button>
+                        </div>
+                    </div>
+                    <div class="price-row">
+                        <span class="total-label">결제금액</span>
+                        <div>
+                            <span class="total-price">0 <small>원</small></span>
+                            <span class="price-breakdown">공급가 : 0원 + 부가세 : 0원</span>
+                        </div>
                     </div>
                 </div>
-                 <div class="summary-row">
-                    <label for="memo" class="form-label">메모</label>
-                    <input type="text" id="memo" class="form-input" placeholder="메모를 적어주세요">
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <label>주문내역</label>
+                        <p id="order-summary-text"></p>
+                    </div>
+                    <div class="summary-row">
+                        <label for="file-upload">파일</label>
+                        <div class="file-upload-control">
+                             <input type="text" id="file-upload" class="form-input" placeholder="파일추가하기" readonly>
+                        </div>
+                    </div>
+                    <div class="summary-row">
+                        <label for="memo">메모</label>
+                        <input type="text" id="memo" class="form-input" placeholder="메모를 적어주세요">
+                    </div>
                 </div>
             </div>
+
             <div class="footer-actions">
                 <button class="btn btn-primary">바로 주문하기</button>
                 <button class="btn btn-white">장바구니</button>
