@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // =================================================================
-    // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션 및 가격 설정 (여기서 수정) ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-    // =================================================================
-
-    // [수정] 이미지의 가격과 맞추기 위해 기본 단가 변경 (11000 - 2200) / 2 = 4400
-    const BASE_PRICE_PER_100_SHEETS = 4400;
+    const BASE_PRICE_PER_100_SHEETS = 4400; // (공급가 11,000 - 후가공 2,200) / (200장/100) = 4,400
 
     const postProcessingOptions = {
         'guido': { name: '귀도리 [네귀도리/6mm]', price: 2200 }
@@ -40,35 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
 
-    // =================================================================
-    // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션 및 가격 설정 (여기까지 수정) ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-    // =================================================================
-
-
-    // --- DOM 요소 캐싱 ---
     const elements = {
-        productName: document.getElementById('product-name'),
-        paperType: document.getElementById('paper-type'),
-        printMethod: document.getElementById('print-method'),
-        sizePreset: document.getElementById('size-preset'),
-        sizeDisplay: document.querySelector('.size-display'),
-        cutWidth: document.getElementById('cut-width'),
-        cutHeight: document.getElementById('cut-height'),
-        bleedWidth: document.getElementById('bleed-width'),
-        bleedHeight: document.getElementById('bleed-height'),
-        quantity: document.getElementById('quantity'),
-        quantityCase: document.querySelector('.quantity-case'),
-        quantitySlider: document.getElementById('quantity-slider'),
-        mainImage: document.getElementById('main-product-image'),
-        thumbnails: document.querySelectorAll('.thumb-item'),
-        originalPrice: document.querySelector('.original-price'),
-        totalPrice: document.querySelector('.total-price'),
-        priceBreakdown: document.querySelector('.price-breakdown'),
-        orderSummaryText: document.getElementById('order-summary-text')
+        productName: document.getElementById('product-name'), paperType: document.getElementById('paper-type'),
+        printMethod: document.getElementById('print-method'), sizePreset: document.getElementById('size-preset'),
+        sizeDisplay: document.querySelector('.size-display'), cutWidth: document.getElementById('cut-width'),
+        cutHeight: document.getElementById('cut-height'), bleedWidth: document.getElementById('bleed-width'),
+        bleedHeight: document.getElementById('bleed-height'), quantity: document.getElementById('quantity'),
+        quantityCase: document.querySelector('.quantity-case'), quantitySlider: document.getElementById('quantity-slider'),
+        mainImage: document.getElementById('main-product-image'), thumbnails: document.querySelectorAll('.thumb-item'),
+        originalPrice: document.querySelector('.original-price'), totalPrice: document.querySelector('.total-price'),
+        priceBreakdown: document.querySelector('.price-breakdown'), orderSummaryText: document.getElementById('order-summary-text')
     };
     
-    // --- 함수 정의 ---
-
     function populateDropdown(selectElement, options) {
         if (!selectElement) return;
         selectElement.innerHTML = '';
@@ -92,9 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.sizeDisplay.textContent = `${sizeData.cutW}*${sizeData.cutH}`;
         
         const isCustom = selectedSizeValue === 'custom';
-        [elements.cutWidth, elements.cutHeight, elements.bleedWidth, elements.bleedHeight].forEach(input => {
-            input.readOnly = !isCustom;
-        });
+        [elements.cutWidth, elements.cutHeight, elements.bleedWidth, elements.bleedHeight].forEach(input => input.readOnly = !isCustom);
 
         updateOrderDetails();
     }
@@ -107,22 +83,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedCases = parseInt(elements.quantityCase.value, 10);
         const currentCutWidth = elements.cutWidth.value;
         const currentCutHeight = elements.cutHeight.value;
-
         const paperOption = optionsData.paperType.find(p => p.value === selectedPaperValue);
         const paperMultiplier = paperOption ? paperOption.priceMultiplier : 1.0;
-        
         const productPrice = (selectedQuantity / 100) * BASE_PRICE_PER_100_SHEETS * paperMultiplier;
         const postProcessingPrice = postProcessingOptions.guido.price;
-        
         const supplyPrice = (productPrice + postProcessingPrice) * selectedCases;
         const vat = Math.round(supplyPrice * 0.1);
         const totalPrice = supplyPrice + vat;
 
-        // [수정] 정상판매가(취소선)와 결제금액 모두 업데이트
-        elements.originalPrice.innerHTML = `${totalPrice.toLocaleString()}원 <small>부가세 10% 포함</small>`;
+        elements.originalPrice.innerHTML = `${totalPrice.toLocaleString()}원`;
         elements.totalPrice.innerHTML = `${totalPrice.toLocaleString()} <small>원</small>`;
         elements.priceBreakdown.textContent = `공급가 : ${supplyPrice.toLocaleString()}원 + 부가세 : ${vat.toLocaleString()}원`;
-
         const sizeText = `${currentCutWidth}*${currentCutHeight}`;
         const orderSummary = `${selectedProductName}, ${selectedPrintMethod}, 86*54(${sizeText}), ${selectedQuantity}장 * ${selectedCases}건\n${postProcessingOptions.guido.name}`;
         elements.orderSummaryText.innerText = orderSummary;
@@ -135,13 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function syncQuantityDropdown() {
         const sliderValue = parseInt(elements.quantitySlider.value, 10);
         const quantityValues = optionsData.quantity.map(q => parseInt(q.value, 10));
-        
-        const closestValue = quantityValues.reduce((prev, curr) => 
-            Math.abs(curr - sliderValue) < Math.abs(prev - sliderValue) ? curr : prev
-        );
-
-        elements.quantity.value = closestValue;
-        updateOrderDetails();
+        const closestValue = quantityValues.reduce((prev, curr) => Math.abs(curr - sliderValue) < Math.abs(prev - sliderValue) ? curr : prev);
+        if (elements.quantity.value != closestValue) {
+            elements.quantity.value = closestValue;
+            updateOrderDetails();
+        }
     }
 
     function setupEventListeners() {
@@ -153,11 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        const updateTriggers = [elements.productName, elements.paperType, elements.printMethod, elements.quantity, elements.quantityCase];
-        updateTriggers.forEach(el => el.addEventListener('change', updateOrderDetails));
-
+        [elements.productName, elements.paperType, elements.printMethod, elements.quantity, elements.quantityCase].forEach(el => el.addEventListener('change', updateOrderDetails));
         elements.sizePreset.addEventListener('change', updateSizeFields);
-        
         elements.quantity.addEventListener('change', syncQuantitySlider);
         elements.quantitySlider.addEventListener('input', syncQuantityDropdown);
     }
@@ -169,29 +135,13 @@ document.addEventListener('DOMContentLoaded', function() {
         populateDropdown(elements.sizePreset, optionsData.sizePreset);
         populateDropdown(document.getElementById('size-unit'), optionsData.sizeUnit);
         populateDropdown(elements.quantity, optionsData.quantity);
-        
         elements.quantity.value = '200';
-
         const quantityValues = optionsData.quantity.map(q => parseInt(q.value, 10));
         elements.quantitySlider.min = Math.min(...quantityValues);
         elements.quantitySlider.max = Math.max(...quantityValues);
-        
-        // 슬라이더 라벨 동적 업데이트 (옵션 데이터 기반)
-        const sliderLabels = document.querySelector('.quantity-slider-container .slider-labels');
-        if (sliderLabels) {
-            const labels = optionsData.quantity.map(q => q.text);
-            const children = sliderLabels.children;
-            if (children.length === labels.length) {
-                for(let i=0; i<children.length; i++) {
-                    children[i].textContent = labels[i];
-                }
-            }
-        }
-        
         setupEventListeners();
         updateSizeFields();
         syncQuantitySlider();
     }
-
     init();
 });
