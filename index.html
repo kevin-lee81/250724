@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드명함 주문 페이지</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>카드명함</h1>
+            <div class="header-buttons">
+                <button class="btn btn-yellow"><i class="fa-solid fa-download"></i> 템플릿 다운로드</button>
+                <button class="btn btn-yellow"><i class="fa-solid fa-file-lines"></i> 작업가이드 보기</button>
+                <button class="btn btn-yellow"><i class="fa-solid fa-tags"></i> 재질 보기</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 왼쪽: 상품 이미지 -->
+            <section class="product-gallery">
+                <div class="main-image-container">
+                    <img src="https://i.imgur.com/rNlCiiD.png" alt="카드명함 예시" id="main-product-image">
+                </div>
+                <div class="thumbnails">
+                    <div class="thumb-item"><img src="https://i.imgur.com/4hE8F3O.png" alt="Thumbnail 1"></div>
+                    <div class="thumb-item"><img src="https://i.imgur.com/T0a3r5S.png" alt="Thumbnail 2"></div>
+                    <div class="thumb-item"><img src="https://i.imgur.com/vHq05sM.png" alt="Thumbnail 3"></div>
+                    <div class="thumb-item active"><img src="https://i.imgur.com/rNlCiiD.png" alt="Thumbnail 4"></div>
+                </div>
+            </section>
+
+            <!-- 오른쪽: 주문 옵션 -->
+            <section class="order-form">
+                <div class="form-section">
+                    <div class="form-row">
+                        <label class="form-label basic-label">기본사항</label>
+                        <div class="form-control-group">
+                            <div class="form-row-inner">
+                                <label for="print-title" class="sub-label">인쇄물제목</label>
+                                <input type="text" id="print-title" class="form-input" placeholder="업로드한 파일명은 인쇄물 제목으로 사용됩니다.">
+                            </div>
+                            <div class="form-row-inner">
+                                <label for="product-name" class="sub-label">상품명</label>
+                                <select id="product-name" class="form-select"></select>
+                            </div>
+                            <div class="form-row-inner">
+                                <label for="paper-type" class="sub-label">종이</label>
+                                <select id="paper-type" class="form-select"></select>
+                            </div>
+                            <div class="form-row-inner">
+                                <label for="print-method" class="sub-label">인쇄도수</label>
+                                <select id="print-method" class="form-select"></select>
+                            </div>
+                            <div class="form-row-inner size-row">
+                                <label for="size-preset" class="sub-label">사이즈</label>
+                                <select id="size-preset" class="form-select size-preset"></select>
+                                <span class="size-display"></span>
+                                <select id="size-unit" class="form-select size-unit"></select>
+                            </div>
+                             <div class="form-row-inner dimension-row">
+                                <label class="sub-label hidden-label">사이즈</label>
+                                <div class="dimension-inputs">
+                                    <span>재단사이즈 : 가로 <input type="number" class="form-input dim-input" id="cut-width"> mm</span>
+                                    <span>× 세로 <input type="number" class="form-input dim-input" id="cut-height"> mm</span>
+                                </div>
+                            </div>
+                            <div class="form-row-inner dimension-row">
+                                <label class="sub-label hidden-label">사이즈</label>
+                                <div class="dimension-inputs">
+                                    <span>작업사이즈 : 가로 <input type="number" class="form-input dim-input" id="bleed-width"> mm</span>
+                                    <span>× 세로 <input type="number" class="form-input dim-input" id="bleed-height"> mm</span>
+                                </div>
+                            </div>
+                            <div class="form-row-inner">
+                                <label for="quantity" class="sub-label">수량</label>
+                                <div class="quantity-control">
+                                    <select id="quantity" class="form-select quantity-select"></select>
+                                    <span>x</span>
+                                    <input type="number" value="1" class="form-input quantity-case">
+                                    <span>건</span>
+                                </div>
+                            </div>
+                             <div class="form-row-inner">
+                                <label class="sub-label hidden-label">수량</label>
+                                <div class="quantity-slider-container">
+                                    <input type="range" id="quantity-slider" min="200" max="1000" value="400" step="1" class="slider">
+                                    <div class="slider-labels">
+                                        <span>200장</span>
+                                        <span>400장</span>
+                                        <span>600장</span>
+                                        <span>1,000장</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-row-inner">
+                                <label for="options" class="sub-label">옵션</label>
+                                <input type="text" id="options" class="form-input" placeholder="없음" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section post-processing">
+                    <label class="form-label">후가공</label>
+                    <div class="post-processing-controls">
+                        <button class="btn btn-gray">후가공 선택</button>
+                        <span>귀도리 [네귀도리/6mm]</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section class="item-preview-section">
+            <h2 class="preview-title">ITEM PREVIEW</h2>
+            <div class="preview-box">
+                <div class="preview-image-wrapper">
+                    <img src="https://i.imgur.com/oD4aPjj.png" alt="Good Printing Logo">
+                    <!-- 오버레이 가이드 라인 -->
+                    <div class="guide-line bleed-line"></div>
+                    <div class="guide-line cut-line"></div>
+                    <span class="dim-label dim-w-bleed">90</span>
+                    <span class="dim-label dim-h-bleed">58</span>
+                    <span class="dim-label dim-w-cut">86</span>
+                    <span class="dim-label dim-h-cut">54</span>
+                </div>
+            </div>
+            <div class="preview-controls">
+                <button class="btn btn-white">재단선 끄기</button>
+                <button class="btn btn-white">작업선 끄기</button>
+            </div>
+        </section>
+
+        <footer class="order-summary-footer">
+            <div class="price-details">
+                <div class="price-row">
+                    <span>정상판매가</span>
+                    <span class="original-price">0원 <small>부가세 10% 포함</small></span>
+                    <button class="btn btn-blue-outline">할인상세 보기</button>
+                </div>
+                <div class="price-row">
+                    <span class="total-label">결제금액</span>
+                    <span class="total-price">0 <small>원</small></span>
+                    <span class="price-breakdown">공급가 : 0원 + 부가세 : 0원</span>
+                </div>
+            </div>
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>주문내역</span>
+                    <p id="order-summary-text"></p>
+                </div>
+                 <div class="summary-row">
+                    <label for="file-upload" class="form-label">파일</label>
+                    <div class="file-upload-control">
+                        <button class="btn btn-gray">파일 추가하기</button>
+                        <input type="text" id="file-upload" class="form-input" readonly>
+                    </div>
+                </div>
+                 <div class="summary-row">
+                    <label for="memo" class="form-label">메모</label>
+                    <input type="text" id="memo" class="form-input" placeholder="메모를 적어주세요">
+                </div>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-primary">바로 주문하기</button>
+                <button class="btn btn-white">장바구니</button>
+                <button class="btn btn-white">견적서 출력</button>
+                <button class="btn btn-white">관심상품 등록</button>
+                <span class="help-icon">?</span>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
